@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """
-0-log_queries.py - Decorator that logs SQL queries before execution.
+0-log_queries.py - Decorator that logs SQL queries with timestamp before execution.
 """
 
 import sqlite3
 import functools
+from datetime import datetime  # ✅ Required import
 
 def log_queries(func):
     """
-    Decorator to log SQL queries passed as argument to the function.
+    Decorator to log SQL queries with timestamp.
     """
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         query = kwargs.get("query") or (args[0] if args else "")
-        print(f"Executing SQL query: {query}")
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{timestamp}] Executing SQL query: {query}")
         return func(*args, **kwargs)
     return wrapper
 
@@ -28,3 +30,4 @@ def fetch_all_users(query):
 
 # Example usage
 users = fetch_all_users(query="SELECT * FROM users")
+
