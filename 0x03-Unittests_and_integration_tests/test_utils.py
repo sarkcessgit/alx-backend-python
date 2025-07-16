@@ -27,7 +27,8 @@ class TestAccessNestedMap(unittest.TestCase):
     def test_access_nested_map_exception(self, nested_map, path):
         with self.assertRaises(KeyError) as cm:
             access_nested_map(nested_map, path)
-        self.assertEqual(str(cm.exception), f"'{path[-1]}'")
+        msg = f"'{path[-1]}'"
+        self.assertEqual(str(cm.exception), msg)
 
 
 class TestMemoize(unittest.TestCase):
@@ -51,5 +52,6 @@ class TestMemoize(unittest.TestCase):
             self.assertEqual(result1, 42)
             self.assertEqual(result2, 42)
             mock_method.assert_called_once()
+
 
 
