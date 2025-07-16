@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+"""
+Unit tests for utils module
+"""
+
 import unittest
 from parameterized import parameterized
 from unittest.mock import patch
@@ -44,11 +48,8 @@ class TestMemoize(unittest.TestCase):
             obj = TestClass()
             result1 = obj.a_property
             result2 = obj.a_property
-
             self.assertEqual(result1, 42)
             self.assertEqual(result2, 42)
             mock_method.assert_called_once()
-
-
 
 
